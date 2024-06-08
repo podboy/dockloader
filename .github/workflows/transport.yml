@@ -1,0 +1,51 @@
+# This is a basic workflow to help you get started with Actions
+
+name: PR
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on close pull request events but only for the "workflow" branch
+  pull_request:
+    types: [closed]
+    branches: ["workflow"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "transport"
+  transport:
+    if: github.event.pull_request.merged == "true"
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: "Login to GitHub Container Registry"
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: List version
+        run: |
+          python3 --version
+          pip3 --version
+
+      - name: Install python package
+        run: pip3 install pkgs/*.whl
+
+      - name: Transport image via dockloader
+        run: dockloader transport redis:latest
+
+      - name: List all images
+        run: docker image ls
