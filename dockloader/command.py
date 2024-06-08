@@ -17,7 +17,9 @@ from .attribute import __project__
 from .attribute import __url_home__
 from .attribute import __version__
 from .client import DockerClient
+from .config import add_cmd_config
 from .parser import Tag
+from .parser import TagConfig
 
 
 def filter_tags(tags: Sequence[Tag]) -> Tuple[Tag, ...]:
@@ -32,22 +34,21 @@ def filter_tags(tags: Sequence[Tag]) -> Tuple[Tag, ...]:
 def add_cmd_pull(_arg: argp):
     _arg.add_opt_on("-a", "--all-tags", dest="all_tags",
                     help="pull all image tags")
-    _arg.add_argument("-f", "--file", dest="images_file",
-                      type=FileType("r", encoding="UTF-8"),
-                      help="the file for pulling images",
-                      nargs=1, metavar="FILE")
+    _arg.add_argument("-f", "--config-file", dest="config_file", type=str,
+                      help="the configuration file for pulling images",
+                      nargs=1, default=[], metavar="FILE")
     _arg.add_argument(type=str, dest="images", help="the name for pulling",
                       nargs="*", default=[], metavar="IMAGE")
 
 
 @run_command(add_cmd_pull)
 def run_cmd_pull(cmds: commands) -> int:
-    images: List[str] = cmds.args.images
-    if cmds.args.images_file is not None:
-        images_file: TextIOWrapper = cmds.args.images_file[0]
-        for line in images_file:
-            images.append(line.strip())
-    images_tag: List[Tag] = [Tag.parse(image) for image in images]
+    images_tag: List[Tag] = [Tag.parse(image) for image in cmds.args.images]
+    if len(cmds.args.config_file) > 0:
+        config_file: str = cmds.args.config_file[0]
+        for tag in TagConfig(config_file):
+            images_tag.append(tag)
+
     cmds.logger.info("Pulling images:")
     for tag in filter_tags(images_tag):
         if cmds.args.all_tags:
@@ -102,7 +103,7 @@ def add_cmd(_arg: argp):
     pass
 
 
-@run_command(add_cmd, add_cmd_pull, add_cmd_transport)
+@run_command(add_cmd, add_cmd_config, add_cmd_pull, add_cmd_transport)
 def run_cmd(cmds: commands) -> int:
     return 0
 

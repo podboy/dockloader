@@ -17,7 +17,7 @@ upgrade:
 
 
 upload:
-	xpip-upload --config-file .pypirc dist/*
+	xpip-upload --config-file .pypirc pkgs/*
 
 
 build-requirements:
@@ -26,14 +26,15 @@ build-clean:
 	xpip-build --debug setup --clean
 build: build-requirements build-clean
 	xpip-build --debug setup --all
+	rm -rf pkgs/ && mv dist/ pkgs/
 
 
 install:
-	pip3 install dist/*.whl
+	pip3 install pkgs/*.whl
 uninstall:
 	pip3 uninstall -y dockloader
 reinstall: uninstall
-	pip3 install --force-reinstall --no-deps dist/*.whl
+	pip3 install --force-reinstall --no-deps pkgs/*.whl
 
 
 prepare-test:

@@ -54,8 +54,8 @@ jobs:
         run: pip3 install pkgs/*.whl
       - name: Pull image via dockloader
         run: |
-          dockloader pull nginx:latest
-          dockloader pull ubuntu:latest
+          dockloader pull nginx:latest --stdout --debug
+          dockloader pull ubuntu:latest --stdout --debug
       - name: List all images
         run: docker image ls
 

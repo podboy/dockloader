@@ -1,6 +1,9 @@
 # coding:utf-8
 
+import os
 import re
+from typing import Dict
+from typing import Iterator
 from typing import Optional
 from urllib.parse import urlparse
 
@@ -146,3 +149,33 @@ class Tag:
 
         return cls(repository=repository, registry_host=registry_host,
                    namespace=namespace, tag=tag, digest=digest)
+
+
+class TagConfig:
+    """Parser tag configuration file
+    """
+
+    def __init__(self, filename: str):
+        self.__filename: str = filename
+        self.__tags: Dict[str, Tag] = {}
+
+        if not os.path.isfile(filename):
+            raise FileNotFoundError(f"Config file not found: '{filename}'")
+
+        with open(filename, "r", encoding="utf-8") as rhdl:
+            for line in rhdl:
+                line = line.strip()
+                if line == "" or line.startswith("#"):
+                    continue
+                if "#" in line:
+                    line = line[:line.index("#")].strip()
+                tag = Tag.parse(line)
+                if tag.name not in self.__tags:
+                    self.__tags[tag.name] = tag
+
+    def __iter__(self) -> Iterator[Tag]:
+        return iter(self.__tags.values())
+
+    @property
+    def filename(self) -> str:
+        return self.__filename
