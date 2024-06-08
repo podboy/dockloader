@@ -1,0 +1,210 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python package
+
+on:
+  push:
+    branches: ["dockloader"]
+  pull_request:
+    branches: ["dockloader"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: List version
+        run: |
+          python3 --version
+          pip3 --version
+      - name: Build python package
+        run: make build install
+      # - name: Analysing the code with pylint
+      #   run: make pylint
+      # - name: Lint with flake8
+      #   run: make flake8
+      # - name: Test with pytest
+      #   run: make pytest
+
+  pull:
+    # needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: List version
+        run: |
+          python3 --version
+          pip3 --version
+      - name: Install python package
+        run: pip3 install pkgs/*.whl
+      - name: Pull image via dockloader
+        run: |
+          dockloader pull nginx:latest
+          dockloader pull ubuntu:latest
+      - name: List all images
+        run: docker image ls
+
+  # transport-nginx:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       python-version: ["3.8"]
+
+  #   permissions:
+  #     contents: read
+  #     packages: write
+
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: "Login to GitHub Container Registry"
+  #       uses: docker/login-action@v1
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{github.actor}}
+  #         password: ${{secrets.GITHUB_TOKEN}}
+  #     - name: List version
+  #       run: |
+  #         python3 --version
+  #         pip3 --version
+  #     - name: Install python package
+  #       run: pip3 install pkgs/*.whl
+  #     - name: Transport image via dockloader
+  #       run: dockloader transport nginx:latest
+  #     - name: List all images
+  #       run: docker image ls
+
+  # transport-ubuntu:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       python-version: ["3.9"]
+
+  #   permissions:
+  #     contents: read
+  #     packages: write
+
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: "Login to GitHub Container Registry"
+  #       uses: docker/login-action@v1
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{github.actor}}
+  #         password: ${{secrets.GITHUB_TOKEN}}
+  #     - name: List version
+  #       run: |
+  #         python3 --version
+  #         pip3 --version
+  #     - name: Install python package
+  #       run: pip3 install pkgs/*.whl
+  #     - name: Transport image via dockloader
+  #       run: dockloader transport ubuntu:latest
+  #     - name: List all images
+  #       run: docker image ls
+
+  # transport-mysql:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       python-version: ["3.10"]
+
+  #   permissions:
+  #     contents: read
+  #     packages: write
+
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: "Login to GitHub Container Registry"
+  #       uses: docker/login-action@v1
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{github.actor}}
+  #         password: ${{secrets.GITHUB_TOKEN}}
+  #     - name: List version
+  #       run: |
+  #         python3 --version
+  #         pip3 --version
+  #     - name: Install python package
+  #       run: pip3 install pkgs/*.whl
+  #     - name: Transport image via dockloader
+  #       run: dockloader transport mysql:latest
+  #     - name: List all images
+  #       run: docker image ls
+
+  # transport-mariadb:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       python-version: ["3.11"]
+
+  #   permissions:
+  #     contents: read
+  #     packages: write
+
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: "Login to GitHub Container Registry"
+  #       uses: docker/login-action@v1
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{github.actor}}
+  #         password: ${{secrets.GITHUB_TOKEN}}
+  #     - name: List version
+  #       run: |
+  #         python3 --version
+  #         pip3 --version
+  #     - name: Install python package
+  #       run: pip3 install pkgs/*.whl
+  #     - name: Transport image via dockloader
+  #       run: dockloader transport mariadb:latest
+  #     - name: List all images
+  #       run: docker image ls
+
+  # transport-redis:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       python-version: ["3.12"]
+
+  #   permissions:
+  #     contents: read
+  #     packages: write
+
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: "Login to GitHub Container Registry"
+  #       uses: docker/login-action@v1
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{github.actor}}
+  #         password: ${{secrets.GITHUB_TOKEN}}
+  #     - name: List version
+  #       run: |
+  #         python3 --version
+  #         pip3 --version
+  #     - name: Install python package
+  #       run: pip3 install pkgs/*.whl
+  #     - name: Transport image via dockloader
+  #       run: dockloader transport redis:latest
+  #     - name: List all images
+  #       run: docker image ls

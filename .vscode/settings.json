@@ -1,0 +1,25 @@
+{
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8",
+        // "editor.defaultFormatter": "ms-python.black-formatter",
+    },
+    "python.analysis.importFormat": "relative",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.testing.unittestEnabled": true,
+    "autopep8.args": [
+        "--ignore-local-config",
+    ],
+    "flake8.args": [
+        "--max-line-length=79",
+        "--ignore=C901,E117,E121,E122,E123,E124,E125,E126,E127,E128,E129,E131,E251,E402,H202,H216,H405,W503,W504,W605",
+    ],
+    "pylint.args": [
+        "--errors-only"
+    ],
+    "isort.check": true,
+    "isort.args": [
+        "--force-alphabetical-sort-within-sections",
+        "--force-sort-within-sections",
+        "--force-single-line-imports",
+    ],
+}
