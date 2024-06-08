@@ -5,6 +5,8 @@ import re
 from typing import Dict
 from typing import Iterator
 from typing import Optional
+from typing import Sequence
+from typing import Union
 from urllib.parse import urlparse
 
 
@@ -156,26 +158,55 @@ class TagConfig:
     """
 
     def __init__(self, filename: str):
-        self.__filename: str = filename
+        filename = os.path.abspath(filename)
+        self.__dirname: str = os.path.dirname(filename)
+        self.__basename: str = os.path.basename(filename)
         self.__tags: Dict[str, Tag] = {}
 
-        if not os.path.isfile(filename):
+        if not os.path.isfile(self.filename):
             raise FileNotFoundError(f"Config file not found: '{filename}'")
 
-        with open(filename, "r", encoding="utf-8") as rhdl:
+        with open(self.filename, "r", encoding="utf-8") as rhdl:
             for line in rhdl:
                 line = line.strip()
+
                 if line == "" or line.startswith("#"):
                     continue
+
                 if "#" in line:
                     line = line[:line.index("#")].strip()
-                tag = Tag.parse(line)
-                if tag.name not in self.__tags:
-                    self.__tags[tag.name] = tag
+
+                if line.startswith("import"):
+                    for file in line.split()[1:]:
+                        path: str = os.path.join(self.dirname, file)
+                        self.extend(iter(TagConfig(path)))
+                    continue
+
+                self.append(Tag.parse(line))
 
     def __iter__(self) -> Iterator[Tag]:
         return iter(self.__tags.values())
 
+    def __contains__(self, tag: Union[str, Tag]) -> bool:
+        name = tag if isinstance(tag, str) else tag.name
+        return name in self.__tags
+
+    @property
+    def dirname(self) -> str:
+        return self.__dirname
+
+    @property
+    def basename(self) -> str:
+        return self.__basename
+
     @property
     def filename(self) -> str:
-        return self.__filename
+        return os.path.join(self.dirname, self.basename)
+
+    def append(self, tag: Tag):
+        if tag.name not in self.__tags:
+            self.__tags[tag.name] = tag
+
+    def extend(self, tags: Sequence[Tag]):
+        for tag in tags:
+            self.append(tag)
