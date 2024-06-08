@@ -4,7 +4,9 @@ name: PR
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on close pull request events but only for the "workflow" branch
+  # Triggers the workflow on push or close pull request events but only for the "workflow" branch
+  push:
+    branches: ["workflow"]
   pull_request:
     types: [closed]
     branches: ["workflow"]
@@ -16,7 +18,7 @@ on:
 jobs:
   # This workflow contains a single job called "transport"
   transport:
-    if: github.event.pull_request.merged == "true"
+    if: github.event_name == 'push' || github.event.pull_request.merged
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -26,16 +28,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-
-      - name: "Login to GitHub Container Registry"
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{github.actor}}
-          password: ${{secrets.GITHUB_TOKEN}}
-
       - name: Install python package
         run: pip3 install dockloader
 
@@ -45,8 +37,29 @@ jobs:
           pip3 --version
           pip3 list
 
+      - name: "Login to GitHub Container Registry"
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - uses: actions/checkout@v4
+        with:
+          ref: "master"
+
+      - name: Save old config files to temp
+        run: cp -r cfgs/ /tmp/dockloader_cfgs
+
+      - uses: actions/checkout@v4
+        with:
+          ref: "workflow"
+
+      - name: Show diff
+        run: python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io
+
       - name: Transport image via dockloader
-        run: dockloader transport $(dockloader config | tail -n 1) --stdout --debug
+        run: dockloader transport $(python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io) --stdout --debug
 
       - name: List all images
         run: docker image ls
