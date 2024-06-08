@@ -22,14 +22,24 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-
       - name: Install python package
         run: pip3 install dockloader
 
+      - uses: actions/checkout@v4
+        with:
+          ref: "workflow"
+
+      - name: Save old config files to temp
+        run: cp -r cfgs/ /tmp/dockloader_cfgs
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: Show diff
+        run: python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io
+
       - name: Pull docker image
-        run: dockloader pull $(dockloader config | tail -n 1) --stdout --debug
+        run: dockloader pull $(python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io) --stdout --debug
 
       - name: List all docker images
         run: docker image ls

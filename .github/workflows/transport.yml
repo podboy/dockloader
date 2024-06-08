@@ -26,16 +26,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-
-      - name: "Login to GitHub Container Registry"
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{github.actor}}
-          password: ${{secrets.GITHUB_TOKEN}}
-
       - name: Install python package
         run: pip3 install dockloader
 
@@ -45,8 +35,28 @@ jobs:
           pip3 --version
           pip3 list
 
+      - name: "Login to GitHub Container Registry"
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - uses: actions/checkout@v4
+        with:
+          ref: "workflow"
+
+      - name: Save old config files to temp
+        run: cp -r cfgs/ /tmp/dockloader_cfgs
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: Show diff
+        run: python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io
+
       - name: Transport image via dockloader
-        run: dockloader transport $(dockloader config | tail -n 1) --stdout --debug
+        run: dockloader transport $(python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io) --stdout --debug
 
       - name: List all images
         run: docker image ls
