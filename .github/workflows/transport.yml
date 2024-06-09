@@ -7,6 +7,9 @@ on:
   # Triggers the workflow on push events but only for the "master" branch
   push:
     branches: ["master"]
+  pull_request_review:
+    branches: ["master"]
+    types: [submitted]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -14,8 +17,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "transport"
-  transport:
-    if: github.event_name == 'push'
+  transport-after-approved:
+    if: github.event_name == 'push' || github.event.review.state == 'APPROVED'
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
