@@ -1,5 +1,2 @@
 # [registry_host[:port]/][namespace/]repository[:tag|@sha256:<digest>]
-import library
-import adguard
-import pymumu
-import mingzhebaosheng
+pymumu/smartdns:Release45
