@@ -16,4 +16,7 @@ new_tags: List[Tag] = []
 for tag in new_config:
     if tag not in old_config:
         new_tags.append(tag)
-print(" ".join([tag.name for tag in new_tags]))
+
+
+if len(new_tags) > 0:
+    print(" ".join([tag.name for tag in new_tags]))

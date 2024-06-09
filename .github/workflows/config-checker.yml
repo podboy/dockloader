@@ -36,7 +36,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Show diff
-        run: python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io
+        run: |
+          DIFF=$(python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io)
+          echo "${DIFF}"
+          if [ -z "${DIFF}" ]; then exit 2; fi
 
       - name: Pull docker image
         run: dockloader pull $(python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io) --stdout --debug
