@@ -4,11 +4,9 @@ name: pr-check
 
 # Controls when the workflow will run
 on:
-  # # Triggers the workflow on push or pull request events but only for the "workflows" branch
-  # push:
-  #   branches: ["workflow"]
+  # # Triggers the workflow on pull request events but only for the "master" branch
   pull_request:
-    branches: ["workflow"]
+    branches: ["master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -27,7 +25,7 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          ref: "workflow"
+          ref: "master"
 
       - name: Save old config files to temp
         run: cp -r cfgs/ /tmp/dockloader_cfgs

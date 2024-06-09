@@ -4,12 +4,9 @@ name: exec-transport
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or close pull request events but only for the "workflow" branch
+  # Triggers the workflow on push events but only for the "master" branch
   push:
-    branches: ["workflow"]
-  # pull_request:
-  #   types: [closed]
-  #   branches: ["workflow"]
+    branches: ["master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -46,14 +43,14 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          ref: "master"
+          ref: "archive"
 
       - name: Save old config files to temp
         run: cp -r cfgs/ /tmp/dockloader_cfgs
 
       - uses: actions/checkout@v4
         with:
-          ref: "workflow"
+          ref: "master"
 
       - name: Show diff
         run: python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io
