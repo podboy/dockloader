@@ -3,6 +3,12 @@ MAKEFLAGS += --always-make
 all: build reinstall test
 
 
+archive:
+	git checkout archive
+	git reset --hard origin/master
+	git push -f origin archive
+
+
 clean-cover:
 	rm -rf cover .coverage
 
