@@ -3,9 +3,9 @@
 import os
 import re
 from typing import Dict
+from typing import Iterable
 from typing import Iterator
 from typing import Optional
-from typing import Sequence
 from typing import Union
 from urllib.parse import urlparse
 
@@ -177,9 +177,16 @@ class TagConfig:
                     line = line[:line.index("#")].strip()
 
                 if line.startswith("import"):
-                    for file in line.split()[1:]:
-                        path: str = os.path.join(self.dirname, file)
-                        self.extend(iter(TagConfig(path)))
+                    for text in line.split()[1:]:
+                        path: str = os.path.join(self.dirname, text)
+                        if os.path.isdir(path):
+                            for file in os.listdir(path):
+                                sub_path: str = os.path.join(path, file)
+                                self.extend(TagConfig(sub_path))
+                        elif os.path.isfile(path):
+                            self.extend(TagConfig(path))
+                        else:
+                            raise ValueError(f"Invalid import: '{path}'")
                     continue
 
                 self.append(Tag.parse(line))
@@ -207,6 +214,6 @@ class TagConfig:
         if tag.name not in self.__tags:
             self.__tags[tag.name] = tag
 
-    def extend(self, tags: Sequence[Tag]):
+    def extend(self, tags: Iterable[Tag]):
         for tag in tags:
             self.append(tag)
