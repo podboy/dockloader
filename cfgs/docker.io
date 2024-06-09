@@ -4,3 +4,4 @@ import adguard
 import pymumu
 import photoprism
 import mingzhebaosheng
+import jc21
