@@ -1,0 +1,2 @@
+# [registry_host[:port]/][namespace/]repository[:tag|@sha256:<digest>]
+jc21/nginx-proxy-manager:2.11.2
