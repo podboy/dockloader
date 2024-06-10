@@ -113,12 +113,16 @@ class Tag:
         return f"{self.registry_host}/{self.namespace}/{self.repository}"
 
     @property
+    def name_latest_tag(self) -> str:
+        return f"{self.name_without_tag}:latest"
+
+    @property
     def name(self) -> str:
         return f"{self.registry_host}/{self.namespace}/{self.image}"
 
     @classmethod
-    def parse_short_name(cls, name_with_tag_or_digest: str
-                         ) -> Tuple[str, Optional[str], Optional[str], List[str]]:
+    def parse_short_name(cls, name_with_tag_or_digest: str)\
+            -> Tuple[str, Optional[str], Optional[str], List[str]]:
         """Parse a short Docker tag name string.
 
         short name format: repository[:<tag|tags>|@sha256:<digest>]
@@ -195,15 +199,45 @@ class Tag:
                    digest=digest)
 
 
-class TagConfig:
+class TagConfigBase:
+    """Tag configuration
+    """
+
+    def __init__(self):
+        self.__tags: Dict[str, Tag] = {}
+
+    def __iter__(self) -> Iterator[Tag]:
+        return iter(self.__tags.values())
+
+    def __contains__(self, tag: Union[str, Tag]) -> bool:
+        name = tag if isinstance(tag, str) else tag.name
+        return name in self.__tags
+
+    def __len__(self) -> int:
+        return len(self.__tags)
+
+    def append(self, tag: Union[str, Tag]):
+        if isinstance(tag, str):
+            tag = Tag.parse_long_name(tag)
+
+        tag_name: str = tag.name
+        if tag_name not in self.__tags:
+            self.__tags[tag_name] = tag
+
+    def extend(self, tags: Iterable[Union[str, Tag]]):
+        for tag in tags:
+            self.append(tag)
+
+
+class TagConfigFile(TagConfigBase):
     """Parser tag configuration file
     """
 
     def __init__(self, filename: str):
+        super().__init__()
         filename = os.path.abspath(filename)
         self.__dirname: str = os.path.dirname(filename)
         self.__basename: str = os.path.basename(filename)
-        self.__tags: Dict[str, Tag] = {}
 
         if not os.path.isfile(self.filename):
             raise FileNotFoundError(f"Config file not found: '{filename}'")
@@ -224,21 +258,14 @@ class TagConfig:
                         if os.path.isdir(path):
                             for file in os.listdir(path):
                                 sub_path: str = os.path.join(path, file)
-                                self.extend(TagConfig(sub_path))
+                                self.extend(TagConfigFile(sub_path))
                         elif os.path.isfile(path):
-                            self.extend(TagConfig(path))
+                            self.extend(TagConfigFile(path))
                         else:
                             raise ValueError(f"Invalid import: '{path}'")
                     continue
 
                 self.append(Tag.parse_long_name(line))
-
-    def __iter__(self) -> Iterator[Tag]:
-        return iter(self.__tags.values())
-
-    def __contains__(self, tag: Union[str, Tag]) -> bool:
-        name = tag if isinstance(tag, str) else tag.name
-        return name in self.__tags
 
     @property
     def dirname(self) -> str:
@@ -251,11 +278,3 @@ class TagConfig:
     @property
     def filename(self) -> str:
         return os.path.join(self.dirname, self.basename)
-
-    def append(self, tag: Tag):
-        if tag.name not in self.__tags:
-            self.__tags[tag.name] = tag
-
-    def extend(self, tags: Iterable[Tag]):
-        for tag in tags:
-            self.append(tag)

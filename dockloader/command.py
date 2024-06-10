@@ -18,7 +18,7 @@ from .attribute import __version__
 from .client import DockerClient
 from .config import add_cmd_config
 from .parser import Tag
-from .parser import TagConfig
+from .parser import TagConfigFile
 
 
 def filter_tags(tags: Sequence[Tag]) -> Tuple[Tag, ...]:
@@ -33,7 +33,7 @@ def parse_tags(args: Namespace) -> Tuple[Tag, ...]:
     tags: List[Tag] = [Tag.parse_long_name(name) for name in args.images]
     if len(args.config_file) > 0:
         config_file: str = args.config_file[0]
-        for tag in TagConfig(config_file):
+        for tag in TagConfigFile(config_file):
             tags.append(tag)
 
     extra_tags: List[Tag] = []

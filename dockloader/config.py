@@ -7,7 +7,7 @@ from xarg import argp
 from xarg import commands
 from xarg import run_command
 
-from .parser import TagConfig
+from .parser import TagConfigFile
 
 DEFAULT_CONFIG_FILE = os.path.join("cfgs", "docker.io")
 
@@ -22,6 +22,6 @@ def add_cmd_config(_arg: argp):
 @run_command(add_cmd_config)
 def run_cmd_config(cmds: commands) -> int:
     config_file: str = cmds.args.config_file[0]
-    for tag in TagConfig(config_file):
+    for tag in TagConfigFile(config_file):
         cmds.stdout(tag.name)
     return 0

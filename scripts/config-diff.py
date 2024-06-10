@@ -1,22 +1,27 @@
 # coding:utf-8
 
 import sys
-from typing import List
 
 from dockloader import Tag
-from dockloader import TagConfig
+from dockloader import TagConfigBase
+from dockloader import TagConfigFile
 
 old_config_file = sys.argv[1]
 new_config_file = sys.argv[2]
 
-old_config = TagConfig(old_config_file)
-new_config = TagConfig(new_config_file)
+old_config = TagConfigFile(old_config_file)
+new_config = TagConfigFile(new_config_file)
 
-new_tags: List[Tag] = []
+add_tags: TagConfigBase = TagConfigBase()
 for tag in new_config:
     if tag not in old_config:
-        new_tags.append(tag)
+        latest_tag: str = tag.name_latest_tag
+        if latest_tag in old_config:
+            # Automatically add the latest tag again
+            add_tags.append(Tag.parse_long_name(latest_tag))
+        add_tags.extend(tag.extra_tags)
+        add_tags.append(tag)
 
 
-if len(new_tags) > 0:
-    print(" ".join([tag.name for tag in new_tags]))
+if len(add_tags) > 0:
+    print(" ".join([tag.name for tag in add_tags]))
