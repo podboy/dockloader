@@ -5,7 +5,9 @@ import re
 from typing import Dict
 from typing import Iterable
 from typing import Iterator
+from typing import List
 from typing import Optional
+from typing import Tuple
 from typing import Union
 from urllib.parse import urlparse
 
@@ -35,19 +37,32 @@ def is_valid_repository_name(repository: str) -> bool:
 class Tag:
     """Docker Tag Format:
 
-    [registry_host[:port]/][namespace/]repository[:tag|@sha256:<digest>]
+    [registry_host[:port]/][namespace/]repository[:<tag>|@sha256:<digest>]
     """
 
     def __init__(self, repository: str,
                  registry_host: Optional[str] = None,
                  namespace: Optional[str] = None,
                  tag: Optional[str] = None,
+                 extra_tags: List[str] = [],
                  digest: Optional[str] = None):
+        if tag is None:
+            if len(extra_tags) > 0:
+                raise ValueError("tag must be set when extra_tags is set")
+        elif digest is not None:
+            raise ValueError("tag and digest cannot be set at the same time")
+
         self.__registry_host: Optional[str] = registry_host
         self.__namespace: Optional[str] = namespace
         self.__repository: str = repository
         self.__tag: Optional[str] = tag
         self.__digest: Optional[str] = digest
+        self.__extra_tags: Dict[str, Tag] = {
+            extra_tag: Tag(repository=repository,
+                           registry_host=registry_host,
+                           namespace=namespace,
+                           tag=extra_tag)
+            for extra_tag in extra_tags}
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.name}) "\
@@ -76,6 +91,10 @@ class Tag:
         return self.__tag or "latest"
 
     @property
+    def extra_tags(self) -> Iterator["Tag"]:
+        return iter(self.__extra_tags.values())
+
+    @property
     def digest(self) -> Optional[str]:
         return self.__digest
 
@@ -98,8 +117,42 @@ class Tag:
         return f"{self.registry_host}/{self.namespace}/{self.image}"
 
     @classmethod
-    def parse(cls, name: str) -> "Tag":
-        """Parse a Docker tag string.
+    def parse_short_name(cls, name_with_tag_or_digest: str
+                         ) -> Tuple[str, Optional[str], Optional[str], List[str]]:
+        """Parse a short Docker tag name string.
+
+        short name format: repository[:<tag|tags>|@sha256:<digest>]
+        multiple tags format: <tag1>[,<tag2>[,<tag3>[,...]]
+        """
+        tag: Optional[str] = None
+        digest: Optional[str] = None
+
+        # Split by ":tag" or "@sha256:digest" to get tag or digest
+        repository_with_digest = name_with_tag_or_digest.split("@")
+        if len(repository_with_digest) == 2:
+            repository, digest = repository_with_digest
+            # Check the digest format (@sha256:<digest>)
+            if len(digest) != 71 or not digest.startswith("sha256:"):
+                raise ValueError(f"Invalid digest: '{digest}'")
+        else:
+            repository_with_tag = name_with_tag_or_digest.split(":")
+            if len(repository_with_tag) == 2:
+                repository, tag = repository_with_tag
+            else:
+                repository = name_with_tag_or_digest
+
+        if tag is not None:
+            # Handle the tag format ([:<tag>[,<tag>[,...]]])
+            tags = tag.split(",")
+            return repository, tags[0], digest, tags[1:]
+
+        return repository, tag, digest, []
+
+    @classmethod
+    def parse_long_name(cls, name: str) -> "Tag":
+        """Parse a long Docker tag name string.
+
+        [registry_host[:port]/][namespace/]repository[:<tag>|@sha256:<digest>]
         """
         # # Remove protocol prefix if present (like https:// or http://)
         # parsed_url = urlparse(name)
@@ -131,26 +184,15 @@ class Tag:
         else:
             raise ValueError(f"Invalid tag: '{name}'")
 
-        # Split by ":" or "@sha256:" to get tag or digest
-        repository_with_digest = repo_with_tag_or_digest.split("@")
-        if len(repository_with_digest) == 2:
-            repository, digest = repository_with_digest
-            if len(digest) != 71 or not digest.startswith("sha256:"):
-                raise ValueError(f"Invalid digest: '{digest}'")
-            tag = None
-        else:
-            repository_with_tag = repo_with_tag_or_digest.split(":")
-            if len(repository_with_tag) == 2:
-                repository, tag = repository_with_tag
-                digest = None
-            else:
-                repository, tag, digest = repo_with_tag_or_digest, None, None
+        repository, tag, digest, extra_tags = cls.parse_short_name(
+            repo_with_tag_or_digest)
 
         if not is_valid_repository_name(repository):
             raise ValueError(f"Invalid repository name: '{repository}'")
 
         return cls(repository=repository, registry_host=registry_host,
-                   namespace=namespace, tag=tag, digest=digest)
+                   namespace=namespace, tag=tag, extra_tags=extra_tags,
+                   digest=digest)
 
 
 class TagConfig:
@@ -189,7 +231,7 @@ class TagConfig:
                             raise ValueError(f"Invalid import: '{path}'")
                     continue
 
-                self.append(Tag.parse(line))
+                self.append(Tag.parse_long_name(line))
 
     def __iter__(self) -> Iterator[Tag]:
         return iter(self.__tags.values())
