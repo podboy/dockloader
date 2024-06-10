@@ -7,9 +7,40 @@ from xarg import argp
 from xarg import commands
 from xarg import run_command
 
+from .parser import Tag
+from .parser import TagConfigBase
 from .parser import TagConfigFile
 
 DEFAULT_CONFIG_FILE = os.path.join("cfgs", "docker.io")
+
+
+@add_command("diff", description="list all different tags")
+def add_cmd_config_diff(_arg: argp):
+    _arg.add_argument(type=str, dest="config_file_diff",
+                      help="another configuration file",
+                      nargs=1, metavar="FILE")
+
+
+@run_command(add_cmd_config_diff)
+def run_cmd_config_diff(cmds: commands) -> int:
+    old_config_file: str = cmds.args.config_file[0]
+    new_config_file: str = cmds.args.config_file_diff[0]
+    old_config = TagConfigFile(old_config_file)
+    new_config = TagConfigFile(new_config_file)
+
+    diff_tags: TagConfigBase = TagConfigBase()
+    for tag in new_config:
+        if tag not in old_config:
+            latest_tag: str = tag.name_latest_tag
+            if latest_tag in old_config:
+                # Automatically add the latest tag again
+                diff_tags.append(Tag.parse_long_name(latest_tag))
+            diff_tags.extend(tag.extra_tags)
+            diff_tags.append(tag)
+
+    if len(diff_tags) > 0:
+        cmds.stdout(" ".join([tag.name for tag in diff_tags]))
+    return 0
 
 
 @add_command("config", description="list configuration file")
@@ -19,9 +50,10 @@ def add_cmd_config(_arg: argp):
                       default=[DEFAULT_CONFIG_FILE], metavar="FILE")
 
 
-@run_command(add_cmd_config)
+@run_command(add_cmd_config, add_cmd_config_diff)
 def run_cmd_config(cmds: commands) -> int:
-    config_file: str = cmds.args.config_file[0]
-    for tag in TagConfigFile(config_file):
-        cmds.stdout(tag.name)
+    if not cmds.has_sub(add_cmd_config):
+        config_file: str = cmds.args.config_file[0]
+        for tag in TagConfigFile(config_file):
+            cmds.stdout(tag.name)
     return 0

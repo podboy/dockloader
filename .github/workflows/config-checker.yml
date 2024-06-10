@@ -35,12 +35,12 @@ jobs:
 
       - name: Show diff
         run: |
-          DIFF=$(python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io)
+          DIFF=$(dockloader config diff /tmp/dockloader_cfgs/docker.io)
           echo "${DIFF}"
           if [ -z "${DIFF}" ]; then exit 2; fi
 
       - name: Pull docker image
-        run: dockloader pull $(python3 scripts/config-diff.py /tmp/dockloader_cfgs/docker.io cfgs/docker.io) --stdout --debug
+        run: dockloader pull $(dockloader config diff /tmp/dockloader_cfgs/docker.io) --stdout --debug
 
       - name: List all docker images
         run: docker image ls
