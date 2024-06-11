@@ -1,2 +1,3 @@
 # https://hub.docker.com/_/mysql
 mysql:latest
+mysql:8.4.0,8.4.0-oracle,8.4.0-oraclelinux9,8.4,8.4-oracle,8.4-oraclelinux9,8,8-oracle,8-oraclelinux9,latest

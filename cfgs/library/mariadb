@@ -1,3 +1,4 @@
 # https://hub.docker.com/_/mariadb
 mariadb:latest
-mariadb:10.11.8,10.11
+mariadb:10.11.8,10.11,10,latest
+mariadb:10.6.18,10.6,10,latest
