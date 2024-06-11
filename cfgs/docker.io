@@ -5,6 +5,7 @@
 import library
 import adguard
 import pymumu
+import gitea
 import filegator
 import photoprism
 import mingzhebaosheng
