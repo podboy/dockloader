@@ -23,16 +23,16 @@ def add_cmd_config_diff(_arg: argp):
 
 @run_command(add_cmd_config_diff)
 def run_cmd_config_diff(cmds: commands) -> int:
-    old_config_file: str = cmds.args.config_file[0]
-    new_config_file: str = cmds.args.config_file_diff[0]
-    old_config = TagConfigFile(old_config_file)
-    new_config = TagConfigFile(new_config_file)
+    another_config_file: str = cmds.args.config_file_diff[0]
+    current_config_file: str = cmds.args.config_file[0]
+    another_config = TagConfigFile(another_config_file)
+    current_config = TagConfigFile(current_config_file)
 
     diff_tags: TagConfigBase = TagConfigBase()
-    for tag in new_config:
-        if tag not in old_config:
+    for tag in current_config:
+        if tag not in another_config:
             latest_tag: str = tag.name_latest_tag
-            if latest_tag in old_config:
+            if latest_tag in another_config:
                 # Automatically add the latest tag again
                 diff_tags.append(Tag.parse_long_name(latest_tag))
             diff_tags.extend(tag.extra_tags)
