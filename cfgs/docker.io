@@ -7,6 +7,7 @@ import adguard
 import pymumu
 import gitea
 import filegator
+import gollumwiki
 import photoprism
 import mingzhebaosheng
 import jc21
