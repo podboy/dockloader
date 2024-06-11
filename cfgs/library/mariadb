@@ -1,2 +1,3 @@
-# [registry_host[:port]/][namespace/]repository[:tag|@sha256:<digest>]
-mariadb:10.11
+# https://hub.docker.com/_/mariadb
+mariadb:latest
+mariadb:10.11.8,10.11

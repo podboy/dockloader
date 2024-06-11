@@ -126,7 +126,7 @@ class Tag:
         """Parse a short Docker tag name string.
 
         short name format: repository[:<tag|tags>|@sha256:<digest>]
-        multiple tags format: <tag1>[,<tag2>[,<tag3>[,...]]
+        multiple tags format: <tag1>[,<tag2>[,<tag3>[,...]]]
         """
         tag: Optional[str] = None
         digest: Optional[str] = None
