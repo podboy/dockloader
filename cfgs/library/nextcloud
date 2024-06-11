@@ -1,0 +1,5 @@
+# https://hub.docker.com/_/nextcloud
+nextcloud:latest
+nextcloud:27.1.4,27.1.4-apache
+nextcloud:27.1.4-fpm-alpine
+nextcloud:27.1.4-fpm

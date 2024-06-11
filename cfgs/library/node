@@ -1,0 +1,3 @@
+# https://hub.docker.com/_/node
+node:latest
+node:22.2.0,22.2.0-bookworm,bookworm,current,current-bookworm,latest

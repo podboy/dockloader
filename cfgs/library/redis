@@ -1,2 +1,3 @@
 # https://hub.docker.com/_/redis
 redis:latest
+redis:alpine
