@@ -62,7 +62,9 @@ jobs:
           pip3 list
 
       - name: List config files
-        run: dockloader config
+        run: |
+          dockloader config
+          dockloader config diff cfgs/docker.io
 
       - name: Pull image via dockloader
         run: |

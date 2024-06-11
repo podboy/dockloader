@@ -35,11 +35,11 @@ def run_cmd_config_diff(cmds: commands) -> int:
             if latest_tag in another_config:
                 # Automatically add the latest tag again
                 diff_tags.append(Tag.parse_long_name(latest_tag))
-            diff_tags.extend(tag.extra_tags)
+            diff_tags.extend(reversed(list(tag.extra_tags)))
             diff_tags.append(tag)
 
     if len(diff_tags) > 0:
-        cmds.stdout(" ".join([tag.name for tag in diff_tags]))
+        cmds.stdout(" ".join(reversed([tag.name for tag in diff_tags])))
     return 0
 
 
