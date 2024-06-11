@@ -25,13 +25,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Build python package
+        run: make build install
+
       - name: List version
         run: |
           python3 --version
           pip3 --version
-
-      - name: Build python package
-        run: make build install
+          pip3 list
 
       # - name: Analysing the code with pylint
       #   run: make pylint
@@ -51,13 +52,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install python package
+        run: pip3 install pkgs/*.whl
+
       - name: List version
         run: |
           python3 --version
           pip3 --version
-
-      - name: Install python package
-        run: pip3 install pkgs/*.whl
+          pip3 list
 
       - name: List config files
         run: dockloader config
