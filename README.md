@@ -10,7 +10,7 @@
 
 这项工作并不复杂，当 `workflows` 被创建之后，仅需要提交一个 `PR` 即可触发，然后等待 `actions` 执行完毕即可。
 
-同时，基于 `Python(>=3.8)` 开发的 [dockloader](https://pypi.org/project/dockloader/) 命令行工具可以方便的在多个镜像仓库之间迁移映像。
+同时，基于 `Python(>=3.10)` 开发的 [dockloader](https://pypi.org/project/dockloader/) 命令行工具可以方便的在多个镜像仓库之间迁移映像。
 
 ## 贡献指南
 
