@@ -6,6 +6,7 @@ import library
 import adguard
 import pymumu
 import gitea
+import dannyben
 import filegator
 import gollumwiki
 import photoprism
