@@ -1,2 +1,7 @@
 # https://hub.docker.com/_/ubuntu
 ubuntu:latest
+ubuntu:oracular-20240527, 24.10, oracular, devel
+ubuntu:noble-20240530, 24.04, noble, latest, rolling
+ubuntu:mantic-20240530,23.10,  mantic
+ubuntu:jammy-20240530, 22.04, jammy
+ubuntu:focal-20240530, 20.04, focal
