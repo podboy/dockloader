@@ -1,2 +1,12 @@
 # https://hub.docker.com/r/osixia/phpldapadmin
 osixia/phpldapadmin:latest
+osixia/phpldapadmin:stable
+osixia/phpldapadmin:0.9.0,stable,latest
+osixia/phpldapadmin:0.8.0,stable,latest
+osixia/phpldapadmin:0.7.2,stable,latest
+osixia/phpldapadmin:0.7.1,stable,latest
+osixia/phpldapadmin:0.7.0,stable,latest
+osixia/phpldapadmin:0.6.12,stable,latest
+osixia/phpldapadmin:0.6.11,stable,latest
+osixia/phpldapadmin:0.6.10,stable,latest
+osixia/phpldapadmin:0.6.9,stable,latest

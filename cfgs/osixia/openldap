@@ -1,2 +1,20 @@
 # https://hub.docker.com/r/osixia/openldap
 osixia/openldap:latest
+osixia/openldap:stable
+osixia/openldap:1.5.0,stable,latest
+osixia/openldap:1.4.0,stable,latest
+osixia/openldap:1.3.0,stable,latest
+osixia/openldap:1.2.5,stable,latest
+osixia/openldap:1.2.4,stable,latest
+osixia/openldap:1.2.3,stable,latest
+osixia/openldap:1.2.2,stable,latest
+osixia/openldap:1.2.1,stable,latest
+osixia/openldap:1.2.0,stable,latest
+osixia/openldap:1.1.11,stable,latest
+osixia/openldap:1.1.10,stable,latest
+osixia/openldap:1.1.9,stable,latest
+osixia/openldap:1.1.8,stable,latest
+osixia/openldap:1.1.7,stable,latest
+osixia/openldap:1.1.6,stable,latest
+osixia/openldap:1.1.5,stable,latest
+osixia/openldap:1.1.4,stable,latest
