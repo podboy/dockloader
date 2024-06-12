@@ -147,7 +147,7 @@ class Tag:
 
         if tag is not None:
             # Handle the tag format ([:<tag>[,<tag>[,...]]])
-            tags = tag.split(",")
+            tags = [_tag.strip() for _tag in tag.split(",")]
             return repository, tags[0], digest, tags[1:]
 
         return repository, tag, digest, []
