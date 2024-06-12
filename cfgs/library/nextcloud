@@ -1,26 +1,32 @@
 # https://hub.docker.com/_/nextcloud
 nextcloud:latest
-nextcloud:stable-apache,stable
+nextcloud:stable-apache, stable
 nextcloud:stable-fpm-alpine
 nextcloud:stable-fpm
-nextcloud:27.1.10-apache,27.1.10,stable-apache,stable,latest
-nextcloud:27.1.10-fpm-alpine,stable-fpm-alpine
-nextcloud:27.1.10-fpm,stable-fpm
-nextcloud:27.1.9-apache,27.1.9,stable-apache,stable,latest
-nextcloud:27.1.9-fpm-alpine,stable-fpm-alpine
-nextcloud:27.1.9-fpm,stable-fpm
-nextcloud:27.1.8-apache,27.1.8,stable-apache,stable,latest
-nextcloud:27.1.8-fpm-alpine,stable-fpm-alpine
-nextcloud:27.1.8-fpm,stable-fpm
-nextcloud:27.1.7-apache,27.1.7,stable-apache,stable,latest
-nextcloud:27.1.7-fpm-alpine,stable-fpm-alpine
-nextcloud:27.1.7-fpm,stable-fpm
-nextcloud:27.1.6-apache,27.1.6,stable-apache,stable,latest
-nextcloud:27.1.6-fpm-alpine,stable-fpm-alpine
-nextcloud:27.1.6-fpm,stable-fpm
-nextcloud:27.1.5-apache,27.1.5,stable-apache,stable,latest
-nextcloud:27.1.5-fpm-alpine,stable-fpm-alpine
-nextcloud:27.1.5-fpm,stable-fpm
-nextcloud:27.1.4-apache,27.1.4,stable-apache,stable,latest
-nextcloud:27.1.4-fpm-alpine,stable-fpm-alpine
-nextcloud:27.1.4-fpm,stable-fpm
+nextcloud:29.0.1-apache, 29.0-apache, 29-apache, apache, 29.0.1, 29.0, 29, latest
+nextcloud:29.0.1-fpm, 29.0-fpm, 29-fpm, fpm
+nextcloud:29.0.1-fpm-alpine, 29.0-fpm-alpine, 29-fpm-alpine, fpm-alpine
+nextcloud:28.0.6-apache, 28.0-apache, 28-apache, stable-apache, production-apache, 28.0.6, 28.0, 28, stable, production
+nextcloud:28.0.6-fpm, 28.0-fpm, 28-fpm, stable-fpm, production-fpm
+nextcloud:28.0.6-fpm-alpine, 28.0-fpm-alpine, 28-fpm-alpine, stable-fpm-alpine, production-fpm-alpine
+nextcloud:27.1.10-apache, 27.1.10, stable-apache, stable, latest
+nextcloud:27.1.10-fpm-alpine, stable-fpm-alpine
+nextcloud:27.1.10-fpm, stable-fpm
+nextcloud:27.1.9-apache, 27.1.9, stable-apache, stable, latest
+nextcloud:27.1.9-fpm-alpine, stable-fpm-alpine
+nextcloud:27.1.9-fpm, stable-fpm
+nextcloud:27.1.8-apache, 27.1.8, stable-apache, stable, latest
+nextcloud:27.1.8-fpm-alpine, stable-fpm-alpine
+nextcloud:27.1.8-fpm, stable-fpm
+nextcloud:27.1.7-apache, 27.1.7, stable-apache, stable, latest
+nextcloud:27.1.7-fpm-alpine, stable-fpm-alpine
+nextcloud:27.1.7-fpm, stable-fpm
+nextcloud:27.1.6-apache, 27.1.6, stable-apache, stable, latest
+nextcloud:27.1.6-fpm-alpine, stable-fpm-alpine
+nextcloud:27.1.6-fpm, stable-fpm
+nextcloud:27.1.5-apache, 27.1.5, stable-apache, stable, latest
+nextcloud:27.1.5-fpm-alpine, stable-fpm-alpine
+nextcloud:27.1.5-fpm, stable-fpm
+nextcloud:27.1.4-apache, 27.1.4, stable-apache, stable, latest
+nextcloud:27.1.4-fpm-alpine, stable-fpm-alpine
+nextcloud:27.1.4-fpm, stable-fpm
