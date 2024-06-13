@@ -1,0 +1,10 @@
+# https://hub.docker.com/_/busybox
+busybox:latest
+busybox:1.36.1-glibc, 1.36-glibc, 1-glibc, stable-glibc, glibc
+busybox:1.36.1-uclibc, 1.36-uclibc, 1-uclibc, stable-uclibc, uclibc
+busybox:1.36.1-musl, 1.36-musl, 1-musl, stable-musl, musl
+busybox:1.36.1, 1.36, 1, stable, latest
+busybox:1.35.0-glibc, 1.35-glibc
+busybox:1.35.0-uclibc, 1.35-uclibc
+busybox:1.35.0-musl, 1.35-musl
+busybox:1.35.0, 1.35
