@@ -1,0 +1,30 @@
+# https://hub.docker.com/_/debian
+debian:latest
+debian:bookworm, bookworm-20240612, 12.5, 12, latest
+debian:bookworm-backports
+debian:bookworm-slim, bookworm-20240612-slim, 12.5-slim, 12-slim
+debian:bullseye, bullseye-20240612, 11.9, 11
+debian:bullseye-backports
+debian:bullseye-slim, bullseye-20240612-slim, 11.9-slim, 11-slim
+debian:buster, buster-20240612, 10.13, 10
+debian:buster-slim, buster-20240612-slim, 10.13-slim, 10-slim
+debian:experimental, experimental-20240612
+debian:oldoldstable, oldoldstable-20240612
+debian:oldoldstable-slim, oldoldstable-20240612-slim
+debian:oldstable, oldstable-20240612
+debian:oldstable-backports
+debian:oldstable-slim, oldstable-20240612-slim
+debian:rc-buggy, rc-buggy-20240612
+debian:sid, sid-20240612
+debian:sid-slim, sid-20240612-slim
+debian:stable, stable-20240612
+debian:stable-backports
+debian:stable-slim, stable-20240612-slim
+debian:testing, testing-20240612
+debian:testing-backports
+debian:testing-slim, testing-20240612-slim
+debian:trixie, trixie-20240612
+debian:trixie-backports
+debian:trixie-slim, trixie-20240612-slim
+debian:unstable, unstable-20240612
+debian:unstable-slim, unstable-20240612-slim
