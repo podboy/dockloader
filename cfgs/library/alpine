@@ -1,0 +1,7 @@
+# https://hub.docker.com/_/alpine
+alpine:latest
+alpine:20240606, edge
+alpine:3.20.0, 3.20, 3, latest
+alpine:3.19.1, 3.19
+alpine:3.18.6, 3.18
+alpine:3.17.7, 3.17
