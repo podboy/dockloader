@@ -1,3 +1,24 @@
 # https://hub.docker.com/_/node
 node:latest
-node:22.2.0,22.2.0-bookworm,bookworm,current,current-bookworm,latest
+node:22-alpine3.19, 22.3-alpine3.19, 22.3.0-alpine3.19, alpine3.19, current-alpine3.19
+node:22-alpine, 22-alpine3.20, 22.3-alpine, 22.3-alpine3.20, 22.3.0-alpine, 22.3.0-alpine3.20, alpine, alpine3.20, current-alpine, current-alpine3.20
+node:22, 22-bookworm, 22.3, 22.3-bookworm, 22.3.0, 22.3.0-bookworm, bookworm, current, current-bookworm, latest
+node:22-bookworm-slim, 22-slim, 22.3-bookworm-slim, 22.3-slim, 22.3.0-bookworm-slim, 22.3.0-slim, bookworm-slim, current-bookworm-slim, current-slim, slim
+node:22-bullseye, 22.3-bullseye, 22.3.0-bullseye, bullseye, current-bullseye
+node:22-bullseye-slim, 22.3-bullseye-slim, 22.3.0-bullseye-slim, bullseye-slim, current-bullseye-slim
+node:20-alpine3.19, 20.14-alpine3.19, 20.14.0-alpine3.19, iron-alpine3.19, lts-alpine3.19
+node:20-alpine, 20-alpine3.20, 20.14-alpine, 20.14-alpine3.20, 20.14.0-alpine, 20.14.0-alpine3.20, iron-alpine, iron-alpine3.20, lts-alpine, lts-alpine3.20
+node:20, 20-bookworm, 20.14, 20.14-bookworm, 20.14.0, 20.14.0-bookworm, iron, iron-bookworm, lts, lts-bookworm, lts-iron
+node:20-bookworm-slim, 20-slim, 20.14-bookworm-slim, 20.14-slim, 20.14.0-bookworm-slim, 20.14.0-slim, iron-bookworm-slim, iron-slim, lts-bookworm-slim, lts-slim
+node:20-bullseye, 20.14-bullseye, 20.14.0-bullseye, iron-bullseye, lts-bullseye
+node:20-bullseye-slim, 20.14-bullseye-slim, 20.14.0-bullseye-slim, iron-bullseye-slim, lts-bullseye-slim
+node:20-buster, 20.14-buster, 20.14.0-buster, iron-buster, lts-buster
+node:20-buster-slim, 20.14-buster-slim, 20.14.0-buster-slim, iron-buster-slim, lts-buster-slim
+node:18-alpine3.19, 18.20-alpine3.19, 18.20.3-alpine3.19, hydrogen-alpine3.19
+node:18-alpine, 18-alpine3.20, 18.20-alpine, 18.20-alpine3.20, 18.20.3-alpine, 18.20.3-alpine3.20, hydrogen-alpine, hydrogen-alpine3.20
+node:18, 18-bookworm, 18.20, 18.20-bookworm, 18.20.3, 18.20.3-bookworm, hydrogen, hydrogen-bookworm
+node:18-bookworm-slim, 18-slim, 18.20-bookworm-slim, 18.20-slim, 18.20.3-bookworm-slim, 18.20.3-slim, hydrogen-bookworm-slim, hydrogen-slim
+node:18-bullseye, 18.20-bullseye, 18.20.3-bullseye, hydrogen-bullseye
+node:18-bullseye-slim, 18.20-bullseye-slim, 18.20.3-bullseye-slim, hydrogen-bullseye-slim
+node:18-buster, 18.20-buster, 18.20.3-buster, hydrogen-buster
+node:18-buster-slim, 18.20-buster-slim, 18.20.3-buster-slim, hydrogen-buster-slim
