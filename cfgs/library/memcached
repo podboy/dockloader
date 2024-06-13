@@ -1,0 +1,4 @@
+# https://hub.docker.com/_/memcached
+memcached:latest
+memcached:1.6.28, 1.6, 1, latest, 1.6.28-bookworm, 1.6-bookworm, 1-bookworm, bookworm
+memcached:1.6.28-alpine, 1.6-alpine, 1-alpine, alpine, 1.6.28-alpine3.20, 1.6-alpine3.20, 1-alpine3.20, alpine3.20
