@@ -1,0 +1,44 @@
+# https://hub.docker.com/_/python
+python:latest
+python:3.13.0b2-bookworm, 3.13-rc-bookworm
+python:3.13.0b2-slim-bookworm, 3.13-rc-slim-bookworm, 3.13.0b2-slim, 3.13-rc-slim
+python:3.13.0b2-bullseye, 3.13-rc-bullseye
+python:3.13.0b2-slim-bullseye, 3.13-rc-slim-bullseye
+python:3.13.0b2-alpine3.20, 3.13-rc-alpine3.20, 3.13.0b2-alpine, 3.13-rc-alpine
+python:3.13.0b2-alpine3.19, 3.13-rc-alpine3.19
+# python:3.13.0b2-windowsservercore-ltsc2022, 3.13-rc-windowsservercore-ltsc2022
+# python:3.13.0b2-windowsservercore-1809, 3.13-rc-windowsservercore-1809
+python:3.12.4-bookworm, 3.12-bookworm, 3-bookworm, bookworm
+python:3.12.4-slim-bookworm, 3.12-slim-bookworm, 3-slim-bookworm, slim-bookworm, 3.12.4-slim, 3.12-slim, 3-slim, slim
+python:3.12.4-bullseye, 3.12-bullseye, 3-bullseye, bullseye
+python:3.12.4-slim-bullseye, 3.12-slim-bullseye, 3-slim-bullseye, slim-bullseye
+python:3.12.4-alpine3.20, 3.12-alpine3.20, 3-alpine3.20, alpine3.20, 3.12.4-alpine, 3.12-alpine, 3-alpine, alpine
+python:3.12.4-alpine3.19, 3.12-alpine3.19, 3-alpine3.19, alpine3.19
+# python:3.12.4-windowsservercore-ltsc2022, 3.12-windowsservercore-ltsc2022, 3-windowsservercore-ltsc2022, windowsservercore-ltsc2022
+# python:3.12.4-windowsservercore-1809, 3.12-windowsservercore-1809, 3-windowsservercore-1809, windowsservercore-1809
+python:3.11.9-bookworm, 3.11-bookworm
+python:3.11.9-slim-bookworm, 3.11-slim-bookworm, 3.11.9-slim, 3.11-slim
+python:3.11.9-bullseye, 3.11-bullseye
+python:3.11.9-slim-bullseye, 3.11-slim-bullseye
+python:3.11.9-alpine3.20, 3.11-alpine3.20, 3.11.9-alpine, 3.11-alpine
+python:3.11.9-alpine3.19, 3.11-alpine3.19
+# python:3.11.9-windowsservercore-ltsc2022, 3.11-windowsservercore-ltsc2022
+# python:3.11.9-windowsservercore-1809, 3.11-windowsservercore-1809
+python:3.10.14-bookworm, 3.10-bookworm
+python:3.10.14-slim-bookworm, 3.10-slim-bookworm, 3.10.14-slim, 3.10-slim
+python:3.10.14-bullseye, 3.10-bullseye
+python:3.10.14-slim-bullseye, 3.10-slim-bullseye
+python:3.10.14-alpine3.20, 3.10-alpine3.20, 3.10.14-alpine, 3.10-alpine
+python:3.10.14-alpine3.19, 3.10-alpine3.19
+python:3.9.19-bookworm, 3.9-bookworm
+python:3.9.19-slim-bookworm, 3.9-slim-bookworm, 3.9.19-slim, 3.9-slim
+python:3.9.19-bullseye, 3.9-bullseye
+python:3.9.19-slim-bullseye, 3.9-slim-bullseye
+python:3.9.19-alpine3.20, 3.9-alpine3.20, 3.9.19-alpine, 3.9-alpine
+python:3.9.19-alpine3.19, 3.9-alpine3.19
+python:3.8.19-bookworm, 3.8-bookworm
+python:3.8.19-slim-bookworm, 3.8-slim-bookworm, 3.8.19-slim, 3.8-slim
+python:3.8.19-bullseye, 3.8-bullseye
+python:3.8.19-slim-bullseye, 3.8-slim-bullseye
+python:3.8.19-alpine3.20, 3.8-alpine3.20, 3.8.19-alpine, 3.8-alpine
+python:3.8.19-alpine3.19, 3.8-alpine3.19
