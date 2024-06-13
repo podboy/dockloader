@@ -1,4 +1,14 @@
 # https://hub.docker.com/_/mariadb
 mariadb:latest
-mariadb:10.11.8,10.11,10,latest
-mariadb:10.6.18,10.6,10,latest
+mariadb:11.5.1-ubi9-rc, 11.5-ubi9-rc, 11.5.1-ubi-rc, 11.5-ubi-rc
+mariadb:11.5.1-noble-rc, 11.5-noble-rc, 11.5.1-rc, 11.5-rc
+mariadb:11.4.2-ubi9, 11.4-ubi9, 11-ubi9, lts-ubi9, 11.4.2-ubi, 11.4-ubi, 11-ubi, lts-ubi
+mariadb:11.4.2-noble, 11.4-noble, 11-noble, noble, lts-noble, 11.4.2, 11.4, 11, latest, lts
+mariadb:11.2.4-jammy, 11.2-jammy, 11.2.4, 11.2
+mariadb:11.1.5-jammy, 11.1-jammy, 11.1.5, 11.1
+mariadb:10.11.8-ubi9, 10.11-ubi9, 10-ubi9, 10.11.8-ubi, 10.11-ubi, 10-ubi
+mariadb:10.11.8-jammy, 10.11-jammy, 10-jammy, 10.11.8, 10.11, 10
+mariadb:10.6.18-ubi9, 10.6-ubi9, 10.6.18-ubi, 10.6-ubi
+mariadb:10.6.18-focal, 10.6-focal, 10.6.18, 10.6
+mariadb:10.5.25-focal, 10.5-focal, 10.5.25, 10.5
+mariadb:10.4.34-focal, 10.4-focal, 10.4.34, 10.4
