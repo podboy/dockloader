@@ -57,12 +57,20 @@ class Tag:
         self.__repository: str = repository
         self.__tag: Optional[str] = tag
         self.__digest: Optional[str] = digest
-        self.__extra_tags: Dict[str, Tag] = {
-            extra_tag: Tag(repository=repository,
-                           registry_host=registry_host,
-                           namespace=namespace,
-                           tag=extra_tag)
-            for extra_tag in extra_tags}
+        # self.__extra_tags: Dict[str, Tag] = {}
+        # for extra_tag in extra_tags:
+        #     etag: Tag = Tag(repository=repository,
+        #                     registry_host=registry_host,
+        #                     namespace=namespace,
+        #                     tag=extra_tag)
+        #     self.__extra_tags[etag.name] = etag
+        self.__extra_tags: Tags = Tags()
+        for extra_tag in extra_tags:
+            etag: Tag = Tag(repository=repository,
+                            registry_host=registry_host,
+                            namespace=namespace,
+                            tag=extra_tag)
+            self.__extra_tags.append(etag)
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.name}) "\
@@ -73,6 +81,12 @@ class Tag:
 
     def __str__(self):
         return self.name
+
+    def __eq__(self, other: Union[str, "Tag"]) -> bool:
+        if not isinstance(other, (str, Tag)):
+            return False
+        tag = other if isinstance(other, Tag) else Tag.parse_long_name(other)
+        return tag.name == self.name
 
     @property
     def registry_host(self) -> str:
@@ -91,8 +105,8 @@ class Tag:
         return self.__tag or "latest"
 
     @property
-    def extra_tags(self) -> Iterator["Tag"]:
-        return iter(self.__extra_tags.values())
+    def extra_tags(self) -> "Tags":
+        return self.__extra_tags
 
     @property
     def digest(self) -> Optional[str]:
@@ -117,8 +131,15 @@ class Tag:
         return f"{self.name_without_tag}:latest"
 
     @property
+    def name_stable_tag(self) -> str:
+        return f"{self.name_without_tag}:stable"
+
+    @property
     def name(self) -> str:
         return f"{self.registry_host}/{self.namespace}/{self.image}"
+
+    def is_extra_tag(self, other: Union[str, "Tag"]) -> bool:
+        return other in self.extra_tags
 
     @classmethod
     def parse_short_name(cls, name_with_tag_or_digest: str)\
@@ -199,8 +220,8 @@ class Tag:
                    digest=digest)
 
 
-class TagConfigBase:
-    """Tag configuration
+class Tags:
+    """A set of Tags
     """
 
     def __init__(self):
@@ -209,9 +230,9 @@ class TagConfigBase:
     def __iter__(self) -> Iterator[Tag]:
         return iter(self.__tags.values())
 
-    def __contains__(self, tag: Union[str, Tag]) -> bool:
-        name = tag if isinstance(tag, str) else tag.name
-        return name in self.__tags
+    def __contains__(self, other: Union[str, Tag]) -> bool:
+        t = other if isinstance(other, Tag) else Tag.parse_long_name(other)
+        return t.name in self.__tags or any(t in _t.extra_tags for _t in self)
 
     def __len__(self) -> int:
         return len(self.__tags)
@@ -229,7 +250,7 @@ class TagConfigBase:
             self.append(tag)
 
 
-class TagConfigFile(TagConfigBase):
+class TagConfigFile(Tags):
     """Parser tag configuration file
     """
 
