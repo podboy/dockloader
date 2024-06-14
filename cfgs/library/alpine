@@ -1,4 +1,4 @@
-# https://hub.docker.com/_/alpine
+# Docker: https://hub.docker.com/_/alpine
 alpine:latest
 alpine:20240606, edge
 alpine:3.20.0, 3.20, 3, latest

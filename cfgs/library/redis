@@ -1,4 +1,4 @@
-# https://hub.docker.com/_/redis
+# Docker: https://hub.docker.com/_/redis
 redis:latest
 redis:alpine
 redis:bookworm

@@ -1,4 +1,4 @@
-# https://hub.docker.com/_/node
+# Docker: https://hub.docker.com/_/node
 node:latest
 node:22-alpine3.19, 22.3-alpine3.19, 22.3.0-alpine3.19, alpine3.19, current-alpine3.19
 node:22-alpine, 22-alpine3.20, 22.3-alpine, 22.3-alpine3.20, 22.3.0-alpine, 22.3.0-alpine3.20, alpine, alpine3.20, current-alpine, current-alpine3.20

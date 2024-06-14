@@ -1,4 +1,5 @@
-# https://hub.docker.com/r/ixsystems/truecommand
+# Docker: https://hub.docker.com/r/ixsystems/truecommand
+# Documentation: https://www.truenas.com/docs/truecommand/
 ixsystems/truecommand:latest
 ixsystems/truecommand:3.0.1, latest
 ixsystems/truecommand:3.0.0, latest

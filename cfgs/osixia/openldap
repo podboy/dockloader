@@ -1,4 +1,6 @@
-# https://hub.docker.com/r/osixia/openldap
+# Docker: https://hub.docker.com/r/osixia/openldap
+# Github: https://github.com/osixia/docker-openldap
+# Website : https://www.openldap.org/
 osixia/openldap:latest
 osixia/openldap:stable
 osixia/openldap:1.5.0, stable, latest

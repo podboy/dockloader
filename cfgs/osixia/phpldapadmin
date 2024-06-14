@@ -1,4 +1,6 @@
-# https://hub.docker.com/r/osixia/phpldapadmin
+# Docker: https://hub.docker.com/r/osixia/phpldapadmin
+# Github: https://github.com/osixia/docker-phpldapadmin
+# SOURCEFORGE: https://sourceforge.net/projects/phpldapadmin/
 osixia/phpldapadmin:latest
 osixia/phpldapadmin:stable
 osixia/phpldapadmin:0.9.0, stable, latest

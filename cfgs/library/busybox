@@ -1,4 +1,4 @@
-# https://hub.docker.com/_/busybox
+# Docker: https://hub.docker.com/_/busybox
 busybox:latest
 busybox:1.36.1-glibc, 1.36-glibc, 1-glibc, stable-glibc, glibc
 busybox:1.36.1-uclibc, 1.36-uclibc, 1-uclibc, stable-uclibc, uclibc

@@ -1,4 +1,4 @@
-# https://hub.docker.com/_/nginx
+# Docker: https://hub.docker.com/_/nginx
 nginx:latest
 nginx:stable
 nginx:stable-perl

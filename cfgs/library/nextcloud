@@ -1,4 +1,4 @@
-# https://hub.docker.com/_/nextcloud
+# Docker: https://hub.docker.com/_/nextcloud
 nextcloud:latest
 nextcloud:stable-apache, stable
 nextcloud:stable-fpm-alpine

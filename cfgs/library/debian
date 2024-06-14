@@ -1,4 +1,4 @@
-# https://hub.docker.com/_/debian
+# Docker: https://hub.docker.com/_/debian
 debian:latest
 debian:bookworm, bookworm-20240612, 12.5, 12, latest
 debian:bookworm-backports

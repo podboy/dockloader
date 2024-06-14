@@ -1,4 +1,8 @@
-# https://hub.docker.com/r/filegator/filegator
+# Docker: https://hub.docker.com/r/filegator/filegator
+# Github: https://github.com/filegator/filegator
+# Website: https://filegator.io/
+# Preview: https://demo.filegator.io/
+# Documentation: https://docs.filegator.io/
 filegator/filegator:latest
 filegator/filegator:v7.10.1, latest
 filegator/filegator:v7.10.0, latest

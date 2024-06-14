@@ -1,4 +1,4 @@
-# https://hub.docker.com/_/python
+# Docker: https://hub.docker.com/_/python
 python:latest
 python:3.13.0b2-bookworm, 3.13-rc-bookworm
 python:3.13.0b2-slim-bookworm, 3.13-rc-slim-bookworm, 3.13.0b2-slim, 3.13-rc-slim

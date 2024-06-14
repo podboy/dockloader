@@ -1,3 +1,5 @@
-# https://hub.docker.com/r/pymumu/smartdns
+# Docker: https://hub.docker.com/r/pymumu/smartdns
+# Github: https://github.com/pymumu/smartdns
+# Documentation: https://pymumu.github.io/smartdns
 pymumu/smartdns:latest
 pymumu/smartdns:Release45, latest

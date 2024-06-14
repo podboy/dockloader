@@ -1,3 +1,5 @@
-# https://hub.docker.com/r/jc21/nginx-proxy-manager
+# Docker: https://hub.docker.com/r/jc21/nginx-proxy-manager
+# Github: https://github.com/NginxProxyManager/nginx-proxy-manager
+# Website: https://nginxproxymanager.com/
 jc21/nginx-proxy-manager:latest
 jc21/nginx-proxy-manager:2.11.2, 2, latest

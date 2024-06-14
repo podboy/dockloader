@@ -1,4 +1,7 @@
-# https://hub.docker.com/r/gitea/gitea
+# Docker: https://hub.docker.com/r/gitea/gitea
+# Github: https://github.com/go-gitea/gitea
+# Website: https://gitea.com/
+# Documentation: https://docs.gitea.com/
 gitea/gitea:latest
 gitea/gitea:latest-rootless
 gitea/gitea:1.22.0, 1.22, 1, latest

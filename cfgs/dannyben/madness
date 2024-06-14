@@ -1,4 +1,6 @@
-# https://hub.docker.com/r/dannyben/madness
+# Docker: https://hub.docker.com/r/dannyben/madness
+# Github: https://github.com/DannyBen/madness
+# Website: https://madness.dannyb.co/
 dannyben/madness:latest
 dannyben/madness:1.2.0, latest
 dannyben/madness:1.1.5, latest

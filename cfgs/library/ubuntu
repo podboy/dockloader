@@ -1,4 +1,4 @@
-# https://hub.docker.com/_/ubuntu
+# Docker: https://hub.docker.com/_/ubuntu
 ubuntu:latest
 ubuntu:oracular-20240527, 24.10, oracular, devel
 ubuntu:noble-20240530, 24.04, noble, latest, rolling
