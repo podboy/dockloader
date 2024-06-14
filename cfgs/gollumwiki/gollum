@@ -1,4 +1,4 @@
 # https://hub.docker.com/r/gollumwiki/gollum
 gollumwiki/gollum:latest
-gollumwiki/gollum:6.0.0,6.0,6,latest
-gollumwiki/gollum:5.3.3,5.3,5,latest
+gollumwiki/gollum:6.0.0, 6.0, 6, latest
+gollumwiki/gollum:5.3.3, 5.3, 5, latest

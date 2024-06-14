@@ -1,7 +1,7 @@
 # https://hub.docker.com/r/gitea/gitea
 gitea/gitea:latest
 gitea/gitea:latest-rootless
-gitea/gitea:1.22.0,1.22,1,latest
-gitea/gitea:1.22.0-rootless,1.22-rootless,1-rootless,latest-rootless
-gitea/gitea:1.21.11,1.21,1,latest
-gitea/gitea:1.21.11-rootless,1.21-rootless,1-rootless,latest-rootless
+gitea/gitea:1.22.0, 1.22, 1, latest
+gitea/gitea:1.22.0-rootless, 1.22-rootless, 1-rootless, latest-rootless
+gitea/gitea:1.21.11, 1.21, 1, latest
+gitea/gitea:1.21.11-rootless, 1.21-rootless, 1-rootless, latest-rootless
