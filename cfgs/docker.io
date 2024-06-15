@@ -14,4 +14,5 @@ import ltbproject
 import gollumwiki
 import photoprism
 import mingzhebaosheng
+import adrianschubek
 import jc21
