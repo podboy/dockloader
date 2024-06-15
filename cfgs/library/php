@@ -1,0 +1,4 @@
+# Docker: https://hub.docker.com/_/php
+php:latest
+php:8.2.20-apache, 8.2.20-apache-bookworm, 8.2-apache, 8.2-apache-bookworm, 8-apache, 8-apache-bookworm
+php:7.4.33-apache, 7.4.33-apache-bullseye, 7.4-apache, 7.4-apache-bullseye, 7-apache, 7-apache-bullseye
