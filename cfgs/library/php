@@ -1,4 +1,32 @@
 # Docker: https://hub.docker.com/_/php
 php:latest
-php:8.2.20-apache, 8.2.20-apache-bookworm, 8.2-apache, 8.2-apache-bookworm, 8-apache, 8-apache-bookworm
-php:7.4.33-apache, 7.4.33-apache-bullseye, 7.4-apache, 7.4-apache-bullseye, 7-apache, 7-apache-bullseye
+php:8.3.8-apache-bookworm, 8.3-apache-bookworm, 8-apache-bookworm
+php:8.3.8-apache-bullseye, 8.3-apache-bullseye, 8-apache-bullseye
+php:8.3.8-apache, 8.3-apache, 8-apache
+php:8.3.8-fpm-bullseye, 8.3-fpm-bullseye, 8-fpm-bullseye
+php:8.3.8-fpm-bookworm, 8.3-fpm-bookworm, 8-fpm-bookworm
+php:8.3.8-fpm-alpine, 8.3-fpm-alpine, 8-fpm-alpine
+php:8.3.8-fpm, 8.3-fpm, 8-fpm
+php:8.3.8-bookworm, 8.3-bookworm, 8-bookworm
+php:8.3.8-bullseye, 8.3-bullseye, 8-bullseye
+php:8.3.8, 8.3, 8
+php:8.2.20-apache-bookworm, 8.2-apache-bookworm, 8-apache-bookworm
+php:8.2.20-apache-bullseye, 8.2-apache-bullseye, 8-apache-bullseye
+php:8.2.20-apache, 8.2-apache, 8-apache
+php:8.2.20-fpm-bookworm, 8.2-fpm-bookworm, 8-fpm-bookworm
+php:8.2.20-fpm-bullseye, 8.2-fpm-bullseye, 8-fpm-bullseye
+php:8.2.20-fpm-alpine, 8.2-fpm-alpine, 8-fpm-alpine
+php:8.2.20-fpm, 8.2-fpm, 8-fpm
+php:8.2.20-bookworm, 8.2-bookworm, 8-bookworm
+php:8.2.20-bullseye, 8.2-bullseye, 8-bullseye
+php:8.2.20, 8.2, 8
+php:7.4.33-apache-bullseye, 7.4-apache-bullseye, 7-apache-bullseye
+php:7.4.33-apache-buster, 7.4-apache-buster, 7-apache-buster
+php:7.4.33-apache, 7.4-apache, 7-apache
+php:7.4.33-fpm-bullseye, 7.4-fpm-bullseye, 7-fpm-bullseye
+php:7.4.33-fpm-buster, 7.4-fpm-buster, 7-fpm-buster
+php:7.4.33-fpm-alpine, 7.4-fpm-alpine, 7-fpm-alpine
+php:7.4.33-fpm, 7.4-fpm, 7-fpm
+php:7.4.33-bullseye, 7.4-bullseye, 7-bullseye
+php:7.4.33-buster, 7.4-buster, 7-buster
+php:7.4.33, 7.4, 7
