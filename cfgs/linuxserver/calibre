@@ -1,0 +1,5 @@
+# Docker: https://hub.docker.com/r/linuxserver/calibre
+# Github: https://github.com/linuxserver/docker-calibre
+# Website: https://calibre-ebook.com
+linuxserver/calibre:latest
+linuxserver/calibre:v7.12.0-ls287, version-v7.12.0, 7.12.0, latest

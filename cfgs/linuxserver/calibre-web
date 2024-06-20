@@ -1,0 +1,5 @@
+# Docker: https://hub.docker.com/r/linuxserver/calibre-web
+# Github: https://github.com/linuxserver/docker-calibre-web
+# Source: https://github.com/janeczku/calibre-web
+linuxserver/calibre-web:latest
+linuxserver/calibre-web:0.6.21-ls271, version-0.6.21, 0.6.21, latest
