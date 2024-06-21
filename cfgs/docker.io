@@ -7,6 +7,7 @@ import adguard
 import pymumu
 import osixia
 import gitea
+import openvpn
 import dannyben
 import filegator
 import ixsystems
