@@ -16,4 +16,5 @@ import gollumwiki
 import photoprism
 import mingzhebaosheng
 import adrianschubek
+import jgraph
 import jc21

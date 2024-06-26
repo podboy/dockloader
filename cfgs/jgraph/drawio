@@ -1,0 +1,13 @@
+# Docker: https://hub.docker.com/r/jgraph/drawio
+# Github: https://github.com/jgraph/docker-drawio
+# Github: https://github.com/jgraph/drawio
+# Website: https://www.drawio.com/
+jgraph/drawio:latest
+jgraph/drawio:24.6.3, latest
+jgraph/drawio:24.6.2, latest
+jgraph/drawio:24.6.1, latest
+jgraph/drawio:24.5.5, latest
+jgraph/drawio:24.5.4, latest
+jgraph/drawio:24.5.3, latest
+jgraph/drawio:24.5.2, latest
+jgraph/drawio:24.5.1, latest
