@@ -1,5 +1,6 @@
 # coding:utf-8
 
+from typing import Dict
 from typing import List
 from typing import Optional
 from typing import Sequence
@@ -82,6 +83,9 @@ def add_cmd_transport(_arg: argp):
     _arg.add_argument("-n", "--namespace", dest="namespace", type=str,
                       help="transport to new namespace, default to old value",
                       nargs=1, default=[None], metavar="NAMESPACE")
+    _arg.add_argument("--repo", "--repository", dest="repositorys", type=str,
+                      help="transport to new repository, default to old value",
+                      nargs=1, default=[], action="extend", metavar="REPO")
     add_opt_config_file(_arg, "the configuration file for transporting")
     add_pos_images(_arg, "the name for transporting")
 
@@ -90,13 +94,22 @@ def add_cmd_transport(_arg: argp):
 def run_cmd_transport(cmds: commands) -> int:
     registry: str = cmds.args.registry[0]
     namespace: Optional[str] = cmds.args.namespace[0]
+    repositorys: Dict[int, str] = {i: r for i, r in
+                                   enumerate(cmds.args.repositorys)}
     target: str = f"{registry}/{namespace}" if namespace else registry
+
+    cmds.logger.debug(f"Transporting repositorys: {repositorys}")
     cmds.logger.info(f"Transporting images to {target}:")
-    for tag in parse_tags(cmds.args):
-        new_tag = Tag(repository=tag.repository,
-                      registry_host=registry,
+
+    def get_repository_name(index: int, default: str) -> str:
+        if len(repositorys) > 0:
+            return repositorys.get(index, repositorys[0])
+        return default
+
+    for idx, tag in enumerate(parse_tags(cmds.args)):
+        new_tag = Tag(repository=get_repository_name(idx, tag.repository),
                       namespace=namespace if namespace else tag.namespace,
-                      tag=tag.tag)
+                      registry_host=registry, tag=tag.tag)
         cmds.logger.info(f"\t{tag.name} -> {new_tag.name}")
         DockerClient().transport(tag.name, new_tag.name)
     return 0
