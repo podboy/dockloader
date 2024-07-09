@@ -1,0 +1,5 @@
+# Docker: https://hub.docker.com/r/tensorchord/pgvecto-rs
+# Github: https://github.com/tensorchord/pgvecto.rs
+# Website: https://pgvecto.rs/
+# Documentation: https://docs.pgvecto.rs/
+tensorchord/pgvecto-rs:pg14-v0.2.0
