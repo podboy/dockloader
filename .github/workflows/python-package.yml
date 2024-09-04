@@ -1,0 +1,79 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python Package
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip" # caching pip dependencies
+
+      - name: Build python package
+        run: make build install
+
+      - name: List version
+        run: |
+          python3 --version
+          pip3 --version
+          pip3 list
+
+      # - name: Analysing the code with pylint
+      #   run: make pylint
+      # - name: Lint with flake8
+      #   run: make flake8
+      # - name: Test with pytest
+      #   run: make pytest
+
+  command-line:
+    # needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip" # caching pip dependencies
+
+      - name: Install python package
+        run: |
+          pip3 install --upgrade xpip.build
+          make build install
+
+      - name: List version
+        run: |
+          python3 --version
+          pip3 --version
+          pip3 list
+
+      - name: Pull image via dockloader
+        run: |
+          dockloader pull nginx:latest --stdout --debug
+          dockloader pull ubuntu:latest --stdout --debug
+
+      - name: List all images
+        run: docker image ls
