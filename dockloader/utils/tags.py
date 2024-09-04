@@ -7,6 +7,7 @@ from typing import Iterable
 from typing import Iterator
 from typing import List
 from typing import Optional
+from typing import Sequence
 from typing import Tuple
 from typing import Union
 from urllib.parse import urlparse
@@ -14,11 +15,11 @@ from urllib.parse import urlparse
 
 def is_valid_transport(transport: str) -> bool:
     def is_domain_name(transport: str) -> bool:
-        domain_regex = r"^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"  # noqa
+        domain_regex = r"^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"  # noqa: E501
         return bool(re.match(domain_regex, transport))
 
     def is_domain_name_with_port(transport: str) -> bool:
-        domain_with_port_regex = r"^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]:[0-9]+$"  # noqa
+        domain_with_port_regex = r"^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]:[0-9]+$"  # noqa: E501
         return bool(re.match(domain_with_port_regex, transport))
 
     def is_transport(transport: str) -> bool:
@@ -27,7 +28,7 @@ def is_valid_transport(transport: str) -> bool:
         except ValueError:
             return False
 
-    return is_domain_name(transport) or is_domain_name_with_port(transport) or is_transport(transport)  # noqa
+    return is_domain_name(transport) or is_domain_name_with_port(transport) or is_transport(transport)  # noqa: E501
 
 
 def is_valid_repository_name(repository: str) -> bool:
@@ -248,6 +249,17 @@ class Tags:
     def extend(self, tags: Iterable[Union[str, Tag]]):
         for tag in tags:
             self.append(tag)
+
+    @staticmethod
+    def filter(tags: Sequence[Tag]) -> Tuple[Tag, ...]:
+        names: List[str] = []
+        for tag in tags:
+            if tag.name not in names:
+                names.append(tag.name)
+        return tuple(tag.parse_long_name(name) for name in names)
+
+
+filter_tags = Tags.filter
 
 
 class TagConfigFile(Tags):

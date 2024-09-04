@@ -8,9 +8,9 @@ from xarg import argp
 from xarg import commands
 from xarg import run_command
 
-from .parser import Tag
-from .parser import Tags
-from .parser import TagConfigFile
+from ..utils import Tag
+from ..utils import TagConfigFile
+from ..utils import Tags
 
 DEFAULT_CONFIG_FILE = os.path.join("cfgs", "docker.io")
 

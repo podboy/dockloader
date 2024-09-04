@@ -3,7 +3,6 @@
 from typing import Dict
 from typing import List
 from typing import Optional
-from typing import Sequence
 from typing import Tuple
 
 from xarg import Namespace
@@ -12,22 +11,10 @@ from xarg import argp
 from xarg import commands
 from xarg import run_command
 
-from .attribute import __description__
-from .attribute import __project__
-from .attribute import __url_home__
-from .attribute import __version__
-from .client import DockerClient
-from .config import add_cmd_config
-from .parser import Tag
-from .parser import TagConfigFile
-
-
-def filter_tags(tags: Sequence[Tag]) -> Tuple[Tag, ...]:
-    names: List[str] = []
-    for tag in tags:
-        if tag.name not in names:
-            names.append(tag.name)
-    return tuple(tag.parse_long_name(name) for name in names)
+from ..utils import DockerClient
+from ..utils import Tag
+from ..utils import TagConfigFile
+from ..utils import filter_tags
 
 
 def parse_tags(args: Namespace) -> Tuple[Tag, ...]:
@@ -113,23 +100,3 @@ def run_cmd_transport(cmds: commands) -> int:
         cmds.logger.info(f"\t{tag.name} -> {new_tag.name}")
         DockerClient().transport(tag.name, new_tag.name)
     return 0
-
-
-@add_command(__project__)
-def add_cmd(_arg: argp):
-    pass
-
-
-@run_command(add_cmd, add_cmd_config, add_cmd_pull, add_cmd_transport)
-def run_cmd(cmds: commands) -> int:
-    return 0
-
-
-def main(argv: Optional[Sequence[str]] = None) -> int:
-    cmds = commands()
-    cmds.version = __version__
-    return cmds.run(
-        root=add_cmd,
-        argv=argv,
-        description=__description__,
-        epilog=f"For more, please visit {__url_home__}.")

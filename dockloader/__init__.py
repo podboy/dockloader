@@ -1,5 +1,5 @@
 # coding:utf-8
 
-from .parser import Tag
-from .parser import Tags
-from .parser import TagConfigFile
+from .utils import Tag
+from .utils import Tags
+from .utils import TagConfigFile
