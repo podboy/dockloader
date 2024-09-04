@@ -77,3 +77,8 @@ jobs:
 
       - name: List all images
         run: docker image ls
+
+      - name: List docker hub image all tags
+        run: |
+          dockhub tags list --stdout --debug nginx
+          dockhub tags generate --stdout --debug ubuntu
