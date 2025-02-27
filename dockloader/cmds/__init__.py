@@ -3,10 +3,10 @@
 from typing import Optional
 from typing import Sequence
 
-from xarg import add_command
-from xarg import argp
-from xarg import commands
-from xarg import run_command
+from xkits import add_command
+from xkits import argp
+from xkits import commands
+from xkits import run_command
 
 from ..attribute import __description__
 from ..attribute import __project__
