@@ -3,7 +3,7 @@
 from urllib.parse import urljoin
 
 __project__ = "dockloader"
-__version__ = "0.2.alpha.2"
+__version__ = "0.2"
 __description__ = "Docker Image Downloader."
 __urlhome__ = "https://github.com/podboy/dockloader/"
 __urlcode__ = __urlhome__
